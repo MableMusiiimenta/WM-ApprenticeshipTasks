@@ -9,7 +9,7 @@ I would then run Python3 manage.py runserver which would then run errors and sho
 
 Then I would run the project successfully after installation.
 
-I would then run Python3 manage.py makemigrations, followed by python3 manage.py migrate to instantiate the project's database to my computer.
+I would then run python3 manage.py migrate to instantiate the project's database to my computer.
 
 In case of errors, I would read the logs in the terminal to understand what to do to solve them
 

@@ -19,7 +19,7 @@ Run the project with "python3 manage.py runserver" . Or use py, python, dependin
 
 # DMS architecture map
 
-It is a django MVT framework project. It all starts with the urls.py which call on the views.py based on the view function corresponding to that particular url. 
+It is a django MVT framework project. It all starts with the browser sending an HTTP request to the server. Django receives that request, the URL routing determines which view handles it, the view performs the application logic and may use forms/models/database data, and finally Django sends an HTTP response back to the browser. 
 The view then operates the function inside it, where it finds the template assigned for the task by the user, which it then renders to the User Interface. The views also save valid data to the database(db.sqlite3) where necessary, if the user inputs or edits data in the forms rendered.
 
 
@@ -33,7 +33,7 @@ User inputs baby data such as name, age, parent's name, parent's contact, etc.
 
 The user clicks submit. Submit still calls upon the urls.py, which in turn calls the "add" view function, which checks the validity of the data entered. 
 
-If it is all valid, the view function runs the save() function to store the details in the database and also in the table on the User interface. If anything is invalid, the user gets an error message or notification and the page does not get submitted.
+If it is all valid, the view function runs the save() function to store the details in the database and the updated UI appears because another response/template later reads and displays that data. If anything is invalid, the user gets an error message or notification and the page does not get submitted.
 
 
 # 3 good things

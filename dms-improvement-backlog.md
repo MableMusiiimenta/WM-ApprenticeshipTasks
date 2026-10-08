@@ -5,6 +5,17 @@
 ### Observation
 The code breaks when I click the edit icon on the babies' table.
 
+### Expected behaviour
+
+When a user clicks the edit icon in the table "all babies", for a particular baby, a form filled with the current details of the particular baby appears
+### Actual behaviour
+
+When a user clicks the edit icon in the table "all babies", for a particular baby, the program crashes
+
+### Steps to reproduce
+
+Remove the indentation on the else statement under the edit view in views.py so that the get request knows what to do when called
+
 ### Why I think this may be a problem
 Users will not be able to edit babies' details without the system crashing
 
@@ -22,6 +33,18 @@ How do I ensure it does not happen again in future?
 
 ### Observation
 On the dashboard, the links for Supply Inventory, check pending fees payments, bills and invoicing, babies last week, staff schedule and supplies consumed last week are not clickable. They are just words.
+
+### Expected behaviour
+
+When a user clicks the above-mentioned links on the dashboard, she is supposed to go to the respective page or information insinuated in the links.
+
+### Actual behaviour
+
+When a user clicks the above-mentioned links on the dashboard, she stays on the dashboard page and nothing else happens
+
+### Steps to reproduce
+
+Implement the pages that are called upon by the links and properly link them
 
 ### Why I think this may be a problem
 The administrator might want to click to view those details and fail.
@@ -55,6 +78,18 @@ form html templates
 
 ### Observation
 The success message after registering baby arrival partly disappears under the navbar
+
+### Expected behaviour
+
+When a user successfully submits the baby's arrival form, the success message displays clearly on a page.
+
+### Actual behaviour
+
+When a user successfully submits the baby's arrival form, the success message is hidden under the navbar and one can't tell what it says.
+
+### Steps to reproduce
+
+Navigate to base.html in the babies repository and increase the padding-top of the body so that it can push down the success message
 
 ### How I noticed it
 I registered new arrival and successfully submitted the details

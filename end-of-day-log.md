@@ -4,7 +4,7 @@ Created md files/documentation for the Daycare Management System
 
 ## Learned:
 I learned to properly explain the architectural flow of a Django project
-I learned that displaying ID in the url can make a public site extremely vulnerable
+I learned that displaying ID in the URL is a security concern especially on public sites. The important security question is whether the application checks that the current user is actually allowed to access or modify record, authentication/identification vs. authorization
 I learned to document a project
 
 Blocked: 
