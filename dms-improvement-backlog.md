@@ -14,7 +14,13 @@ When a user clicks the edit icon in the table "all babies", for a particular bab
 
 ### Steps to reproduce
 
-Remove the indentation on the else statement under the edit view in views.py so that the get request knows what to do when called
+Navigate to the "All babies" table and click the edit icon on one of the babies
+
+### Possible cause
+I think the code is unable to reach the else part of the function that displays the form with baby information to be edited
+
+### possible solution
+The indentation before the last else needs to be removed
 
 ### Why I think this may be a problem
 Users will not be able to edit babies' details without the system crashing
@@ -30,7 +36,7 @@ How do I go about it?
 How do I ensure it does not happen again in future?
 
 
-
+# Non-functional links
 ### Observation
 On the dashboard, the links for Supply Inventory, check pending fees payments, bills and invoicing, babies last week, staff schedule and supplies consumed last week are not clickable. They are just words.
 
@@ -44,7 +50,14 @@ When a user clicks the above-mentioned links on the dashboard, she stays on the 
 
 ### Steps to reproduce
 
-Implement the pages that are called upon by the links and properly link them
+Navigate to the dashboard and click the links mentioned in the issue
+
+### Possible cause 
+
+I think it is caused by non-existing pages. The links simply are placeholders.
+
+### possible solution
+The pages/information tagged need to be implemented and linked to the dashboard
 
 ### Why I think this may be a problem
 The administrator might want to click to view those details and fail.
@@ -57,6 +70,38 @@ I hovered over them and they aren't clickable
 This area is the dashb.html template
 
 ### Questions
+
+
+# Hidden Notification
+### Observation
+The success message after registering baby arrival partly disappears under the navbar
+
+### Expected behaviour
+
+When a user successfully submits the baby's arrival form, the success message displays clearly on a page.
+
+### Actual behaviour
+
+When a user successfully submits the baby's arrival form, the success message is hidden under the navbar and one can't tell what it says.
+
+### Steps to reproduce
+
+Correctly fill a form to register baby's arrival and submit
+
+### Possible cause
+I think in the base.html, the body does not have enough top padding to cater for the notification or the notification does not have enough top margin to push it down enough to be viewed
+
+### possible solution
+I suggest to increase the top padding for the body
+
+### How I noticed it
+I registered new arrival and successfully submitted the details
+
+### Why I think this may be a problem
+It's not visible so One might wonder what notification is partially hidden that they are unable to read
+
+### Possible area of the code
+html template for registering baby arrival form
 
 
 
@@ -72,34 +117,6 @@ Maybe not a problem but sore on the eyes
 
 ### Possible area of the code
 form html templates
-
-
-
-
-### Observation
-The success message after registering baby arrival partly disappears under the navbar
-
-### Expected behaviour
-
-When a user successfully submits the baby's arrival form, the success message displays clearly on a page.
-
-### Actual behaviour
-
-When a user successfully submits the baby's arrival form, the success message is hidden under the navbar and one can't tell what it says.
-
-### Steps to reproduce
-
-Navigate to base.html in the babies repository and increase the padding-top of the body so that it can push down the success message
-
-### How I noticed it
-I registered new arrival and successfully submitted the details
-
-### Why I think this may be a problem
-It's not visible so One might wonder what notification is partially hidden that they are unable to read
-
-### Possible area of the code
-html template for registering baby arrival form
-
 
 
 

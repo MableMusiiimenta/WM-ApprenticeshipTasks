@@ -11,7 +11,7 @@ You give it the value you're checking and the target data type
 
 ## what it returns;
 
-I think it returns True or False by default but can also return another custom result you set when the value fits the data type
+I think it returns True if the value fits the given data type and returns False if the value does not fit the given data type
 
 ## one small example written by you.
 
@@ -20,11 +20,15 @@ if isinstance(value, int):
     print("Number detected")
 
 
+
 # dict.items() in a For loop
 
-## what it does;
+# what happens when you loop directly over a dictionary;
+It returns only the keys for each item in the dictionary
 
-I think it returns a new view of a dictionary's items in key, value pairs
+## what it .item() does;
+
+I think it gives you a view of both keys and values to be unpacked in the loop accordingly
 
 ## what you give it;
 
@@ -46,11 +50,12 @@ payments2 = {"baby": "Test", "expected": -5000, "paid": 0, "price": 8.67}
 # =+ vs +=
 ## what it does;
 
-=+ refers to a new value regardless of what iterated before it while += refers to adding the new value to what it found in place
+=+ is not an operator, the number after it just has a positive/plus sign
++= is adds to the existing value
 
 ## what you give it;
 
-I think it depends on one's goal. and I think you give it the original value and the numbers in an array to loop through
+I think you write what you are trying to add on it
 
 ## what it returns;
 
@@ -59,10 +64,10 @@ It returns the final value
 ## one small example written by you.
 
 numbers = [4, 5, 4]
-sum = 4
+sum = 0
 
 for number in numbers:
-    sum=+number ---The sum will be equal to 4 plus the numbers as they loop through the list. So it will be 8, then 9, then 8
+    sum=+number ---The sum will be equal to 4 plus the numbers as they loop through the list. So it will be 4, then 5, then 4
 
     sume+=number ---In the first iteration, the sum will be 8, then 13, then 17 respectively, so it adds on what it has found
 
