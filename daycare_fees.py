@@ -32,7 +32,13 @@ def calculate_totals():
     total_paid = 0
     total_outstanding = 0
 
-    payments = [    {"baby": "Amina", "expected": 120000, "paid": 120000},    {"baby": "Joel", "expected": 120000, "paid": 80000},    {"baby": "Grace", "expected": 150000, "paid": 0},    {"baby": "Amina", "expected": 50000, "paid": 50000},]
+    payments = [    
+        {"baby_id":1, "baby": "Amina", "expected": 120000, "paid": 120000},    
+        {"baby_id":2, "baby": "Joel", "expected": 120000, "paid": 80000},    
+        {"baby_id":3, "baby": "Grace", "expected": 150000, "paid": 0},    
+        {"baby_id":4, "baby": "Amina", "expected": 50000, "paid": 50000},
+    ]
+
 
     for payment in payments:
         print(payment["baby"])
@@ -41,10 +47,16 @@ def calculate_totals():
         print(payment["paid"])
         print(validate_amount(payment["expected"]))
         print(validate_amount(payment["paid"]))
+
+        if not validate_amount(payment["expected"]):
+            continue 
+
+        if not validate_amount(payment["paid"]):
+            continue
+
         total_expected += payment["expected"]
         total_paid += payment["paid"]
         
-    
         outstanding_amnt = payment["expected"] - payment["paid"]
         
         print(outstanding_amnt)
