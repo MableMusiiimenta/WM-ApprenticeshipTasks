@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+    {% block content %}
+    {% if success %}
+    {{product_name}}
+    {% endif %}
+    <h1>Please place your order</h1>
+    
+    <form method="post" action="/app">
+        <label>
+            Product Name
+            <input type="text" name="product_name">
+        </label>
+        <label>
+            Quantity
+            <input type="number" name="quantity">
+        </label>
+        <label>
+            Country
+            <input type="text" name="country">
+        </label>
+
+        <button type="submit">Submit</button>
+    </form>
+    {% endblock %}

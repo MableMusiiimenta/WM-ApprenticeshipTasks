@@ -34,7 +34,7 @@ product_available = is_product_available(product)
 enough_stock = has_enough_stock(product["stock"], quantity)
 
 ## What changed compared with the previous version?
-In this version, the developer creates functions to return what a derived variable(calculated from given variables) carrying when called upon and stores it in an appropriately named variable
+In this version, the developer creates functions to return what a derived variable(calculated from given variables) is carrying when called upon and stores it in an appropriately named variable
 
 
 ## What became easier to understand?
@@ -62,13 +62,13 @@ This version creates a larger function that checks the validity of other functio
 
 
 ## What became easier to change?
-
+With this version, it is easier to change rules since they are all easily traceable in their defining functions
 
 ## What duplication was removed?
-
+Here, the developer places the different functions in one, composing a business rule that automatically runs through the functions embedded
 
 ## If a business rule changes later, where would I need to change the code?
-
+I would need to change the return value of the particular function
 
 ## What is the advantage for another developer reading the program?
 
