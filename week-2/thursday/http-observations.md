@@ -70,7 +70,7 @@ To share common elements to different pages without repeatedly creating them on 
 ## Why do we use Header and Footer partials?
 
 ## What is the difference between templates/ and static/?
-The templates folder stores html files, while static stores CSS and images
+The templates folder stores html files, while static contains files that Flask sends without rendering them
 
 ## What happens when the browser requests /order?
 A GET request is sent to the server, which then displays the order page
@@ -84,3 +84,28 @@ Flask supports other requests, since without it, the browser is only able to rec
 ## What does the browser do?
 It receives requests and sends them to the server. It also provides dev tools to inspect the status of the site
 
+USER
+ │
+ │ enters quantity
+ ▼
+HTML FORM
+ │
+ │ POST /order
+ ▼
+FLASK ROUTE
+ │
+ │ reads + converts input
+ ▼
+BUSINESS FUNCTIONS
+ │
+ ├── is_valid_quantity()
+ ├── has_enough_stock()
+ └── calculate_subtotal()
+ │
+ │ results
+ ▼
+JINJA TEMPLATE
+ │
+ │ HTML response
+ ▼
+BROWSER

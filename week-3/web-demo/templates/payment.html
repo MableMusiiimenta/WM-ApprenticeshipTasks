@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>Your Order ID is: {{ order_id }}</p>
+
+<h2>Complete payment</h2>
+
+
+<form method="post" action="/payment" style="height: 100px;">
+    <p>Amount Due: {{ subtotal }}</p>
+
+    <label>
+        Enter amount
+        <input type="number" name="amount">
+    </label>
+    <input type="hidden" name="order_id" value="{{ order_id }}">
+    <button type="submit">Submit</button>
+</form>
+
+{% if not payment_ok %}
+<p style="color: goldenrod;">Please complete payment</p>
+{% else %}
+<p style="color: green;">Thank you</p>
+{% endif %}
+
+{% endblock %}

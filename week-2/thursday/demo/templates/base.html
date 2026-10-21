@@ -1,27 +1,30 @@
-{% block title %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Practice</title>
+    <title>
+        {% block title %}
+        Flask Practice
+        {% endblock %}
+    </title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
-{% endblock %}
-{% block content %}
+
+
 <body>
-    <header>
-        {% include "header.html"%}
-    </header>
-    
 
-    
-    
+    {% include "partials/header.html"%}
 
-    
-    <footer>
-        {% include "footer.html"%}
-    </footer>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+
+
+    {% include "partials/footer.html"%}
+
 </body>
-{% endblock %}
+
 </html>

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Please place your order</h2>
+
+
+
+<form method="post" action="/order">
+    <label for="product_id">Choose a product:</label>
+
+    <select name="product_id" id="product_id" required>
+        <option value="">-- Select a product --</option>
+
+        {% for product in products %}
+        <option name="name" value="{{ product['id'] }}">
+            {{ product["name"] }}
+        </option>
+        {% endfor %}
+
+    </select>
+    <label>
+        Quantity
+        <input type="number" name="quantity">
+    </label>
+    <label>
+        Country
+        <input type="text" name="country">
+    </label>
+
+    <button type="submit">Submit</button>
+</form>
+
+{% if product_is_available %}
+{% if quantity is defined %}
+<h2>Order Result</h2>
+
+<p>Product Name: {{ product["name"] }}</p>
+<p>Quantity: {{ quantity }}</p>
+<p>Country: {{ country }}</p>
+<p>Amount Due: {{ subtotal }}</p>
+<p style="color: green;"> is available</p>
+
+{% if not valid_quantity %}
+<p style="color: red;">Please enter a valid quantity.</p>
+{% elif not enough_stock %}
+<p style="color: red;">Not enough stock available.</p>
+{% else %}
+<p style="color: green;">Order can continue.</p>
+{% endif %}
+{% endif %}
+{% else %}
+<p style="color: red;"> is unavailable at the moment</p>
+{% endif %}
+
+{% endblock %}

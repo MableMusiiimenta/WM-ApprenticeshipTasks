@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+{{ new_order }}
+<section style="display:grid; ">
+    <p>Product Name: {{ product["name"] }}</p>
+    <p>Product ID: {{ new_order["product_id"] }}</p>
+    <p>Order ID: {{ new_order["order_id"] }}</p>
+    <p>Subtotal: {{ new_order["subtotal"] }}</p>
+    <p>Quantity Ordered: {{ new_order["quantity"] }}</p>
+    <p>Amount Paid: {{ new_order["payment_amount"]}}</p>
+    <p>Country: {{ new_order["country"] }}</p>
+    
+</section>
+
