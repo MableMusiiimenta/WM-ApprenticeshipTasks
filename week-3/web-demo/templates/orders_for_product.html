@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section style="display:grid; ">
+    <b><p>Orders for {{ product["name"]}}</p></b>
+    {% for order in orders %}
+    <p>Order ID: {{ order["id"] }}</p>
+    <p>Quantity: {{ order["quantity"] }}</p>
+    <p>Amount Paid: {{ order["payment_amount"] }}</p>
+    {% endfor %}
+    {% if not orders %}
+    <p style="color: red;">No orders for this product yet</p>
+    {% endif %}
+    {% if not {{ product["id"] }}%}
+    <p style="color: red;">Product does not exist</p>
+    {% endif %}
+</section>
+
+{% endblock %}
