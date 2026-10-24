@@ -6,6 +6,7 @@
     {% for product in products %}
     <p>Product Name: {{ product["name"] }}</p>
     <p>Price: {{ product["price"]}}</p>
+    <a href="/products/{{ product['id'] }}" style="color: darkred;">See More</a>
     {% endfor %}
 </section>
 

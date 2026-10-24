@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 {{ new_order }}
-<section style="display:grid; ">
+<section style="display:inline; ">
+    {% for order in orders %}
+
+    <b>
+        <p>Product ID: {{ order["product_id"] }}</p>
+    </b>
+    {% for product in products%}
     <p>Product Name: {{ product["name"] }}</p>
-    <p>Product ID: {{ new_order["product_id"] }}</p>
-    <p>Order ID: {{ new_order["order_id"] }}</p>
-    <p>Subtotal: {{ new_order["subtotal"] }}</p>
-    <p>Quantity Ordered: {{ new_order["quantity"] }}</p>
-    <p>Amount Paid: {{ new_order["payment_amount"]}}</p>
-    <p>Country: {{ new_order["country"] }}</p>
-    
+    {% endfor %}
+    <p>Order ID: {{ order["id"] }}</p>
+    <p>Quantity Ordered: {{ order["quantity"] }}</p>
+    <p>Amount Paid: {{ order["payment_amount"]}}</p>
+    <p>Country: {{ order["country"] }}</p>
+
+    {% endfor %}
+
 </section>
 
+{% endblock %}

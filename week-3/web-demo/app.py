@@ -1,5 +1,5 @@
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -8,10 +8,11 @@ from business import (
     is_valid_quantity,
     has_enough_stock,
     is_product_available,
-    is_payment_complete
+    is_payment_complete,
+    
 )
 
-from database import get_products, get_product, add_order, get_order, get_orders, add_payment
+from database import get_products, get_product, add_order, get_order, get_orders, add_payment, update_stock, get_orders_for_product
 from data import order_intake
 
 
@@ -67,27 +68,39 @@ def payment():
     if request.method=="POST":
         order_id = int(request.form["order_id"])
         amount = int(request.form["amount"])
+
         order=get_order(order_id)
         subtotal=order["subtotal"]
         payment_ok = is_payment_complete(amount, subtotal)
         add_payment(amount, order_id)
-        order_intake["order_id"] = order_id
-        return render_template("orders.html",
-            amount=amount,
-            subtotal=subtotal,
-            payment_ok=payment_ok
+        update_stock(order_id)
+        return redirect(url_for("order_details", 
+                            order_id=order_id,)
         )
 
-    products=get_products()
     
-    return render_template("payment.html", products=products)
+    return render_template("payment.html")
 
-@app.get("/orders/<int:order_id>")
+
+@app.get("/order_details/<int:order_id>")
+def order_details(order_id):
+    order=get_order(order_id)
+    return render_template("order_details.html", order=order)
+
+@app.get("/orders")
 def orders():
-    new_order = get_order(order_intake["order_id"])
-    product = get_product(order_intake["product_id"])
-    print(new_order)
-    return render_template("orders.html", new_order=new_order, product=product)
+    orders = get_orders()
+    products = get_products()
+    return render_template("orders.html", orders=orders, products=products)
+
+@app.get("/products/<int:product_id>")
+def orders_for_product(product_id):
+    product = get_product(product_id)
+    orders=get_orders_for_product(product["id"])
+    if product is None:
+        print("Product does not exist")
+    return render_template("orders_for_product.html", orders=orders, product=product)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

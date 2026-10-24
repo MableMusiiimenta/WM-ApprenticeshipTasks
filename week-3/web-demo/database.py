@@ -118,6 +118,18 @@ def get_orders():
 
     return orders
 
+def get_orders_for_product(product_id):
+    connection = get_connection()
+
+    orders = connection.execute(
+        "SELECT * FROM orders where product_id = ?",
+        (product_id,)
+    ).fetchall()
+
+    connection.close()
+
+    return orders
+
 def add_payment(payment, order_id):
     connection = get_connection()
 
@@ -130,6 +142,22 @@ def add_payment(payment, order_id):
     
     connection.commit()
     connection.close()
+
+def update_stock(order_id):
+    order=get_order(order_id)
+    product=get_product(order["product_id"])
+    new_stock=product["stock"]-order["quantity"]
+    connection = get_connection()
+    connection.execute(
+        """
+        UPDATE products SET stock = ? WHERE id = ?
+        """,
+        (new_stock,product["id"])
+    )
+
+    connection.commit()
+    connection.close()
+
 
 
 

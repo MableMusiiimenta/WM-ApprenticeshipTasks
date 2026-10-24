@@ -222,7 +222,7 @@ This shows the html template assigned for that function
 versus:
 
 redirect()
-This changes direction and shows a different html template based on a met condition
+This changes direction and shows a different html template
 
 Does rendering a template change the browser URL?
 No

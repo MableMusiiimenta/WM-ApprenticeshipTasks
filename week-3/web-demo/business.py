@@ -12,3 +12,6 @@ def has_enough_stock(stock, quantity):
 
 def is_payment_complete(amount_paid, amount_due):
     return amount_paid >= amount_due
+
+def stock_left(stock, quantity):
+    return stock - quantity
