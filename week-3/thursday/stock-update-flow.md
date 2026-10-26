@@ -61,35 +61,3 @@ New stock is the result of order quantity subtracted from product current stock
 
 the database record to be updated is current stock
 
-End-of-day update
-
-Please send me:
-
-Done: 
-stock-update-flow.md
-Explained the stock-update flow
-
-Learned:
-How tables can relate to each other in relational databases
-How to take advantage of their relationships
-
-Blocked:
-
-Questions:
-
-
-AI used: None
-
-Commit hash: 
-
-Why is order_id enough to start the stock-update process?
-It is enough because it retrieves the full order which also carries product_id as an attribute
-
-Which step was hardest to understand today?
-retrieving product details given only order_id
-
-One thing that became clearer after writing the flow down:
-how i can retrieve a product and its attributes given only order_id
-
-One thing I still want to practise tomorrow: 
-Querying a table through another table

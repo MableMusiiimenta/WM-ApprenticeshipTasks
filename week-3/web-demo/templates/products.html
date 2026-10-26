@@ -2,6 +2,8 @@
 {% block content %}
 <h2> Browse through our products to find yours </h2>
 
+<a href="products/new_product" style="color: blue;">Add Product</a>
+
 <section style="display:grid; ">
     {% for product in products %}
     <p>Product Name: {{ product["name"] }}</p>

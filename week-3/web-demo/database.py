@@ -158,6 +158,23 @@ def update_stock(order_id):
     connection.commit()
     connection.close()
 
+def add_product(name, active, stock, price):
+    connection = get_connection()
+
+    cursor = connection.execute(
+        """
+        INSERT INTO products (name, active, stock, price)
+        VALUES (?, ?, ?, ?)
+        """,
+        (name, active, stock, price),
+    )
+
+    id = cursor.lastrowid
+
+    connection.commit()
+    connection.close()
+
+    return id
 
 
 

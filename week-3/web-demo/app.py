@@ -1,5 +1,5 @@
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, abort
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ from business import (
     
 )
 
-from database import get_products, get_product, add_order, get_order, get_orders, add_payment, update_stock, get_orders_for_product
+from database import add_product, get_products, get_product, add_order, get_order, get_orders, add_payment, update_stock, get_orders_for_product
 from data import order_intake
 
 
@@ -29,6 +29,26 @@ def all_products():
     products=get_products()
     
     return render_template("products.html", products=products)
+
+@app.route("/products/new_product", methods=["GET", "POST"])
+def new_product():
+
+    if request.method == "POST":
+        name = request.form["name"]
+        active = int(request.form["is_active"])
+        stock = int(request.form["stock"])
+        price = int(request.form["price"])
+
+        if not active:
+            active = 0
+
+        id = add_product(name, active, stock, price)
+        product = id
+        return render_template(
+                "product_details.html",
+                product=product
+            )
+    return render_template("new_product.html")
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
@@ -85,6 +105,8 @@ def payment():
 @app.get("/order_details/<int:order_id>")
 def order_details(order_id):
     order=get_order(order_id)
+    if order is None:
+        abort(404)
     return render_template("order_details.html", order=order)
 
 @app.get("/orders")
@@ -96,11 +118,18 @@ def orders():
 @app.get("/products/<int:product_id>")
 def orders_for_product(product_id):
     product = get_product(product_id)
-    orders=get_orders_for_product(product["id"])
     if product is None:
-        print("Product does not exist")
+            abort(404)
+    orders=get_orders_for_product(product["id"])
+
+    
+    
     return render_template("orders_for_product.html", orders=orders, product=product)
 
+@app.errorhandler(404)
+def not_found(error):
+    page_title="Page Not Found"
+    return render_template("404.html", error=error, page_title=page_title), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

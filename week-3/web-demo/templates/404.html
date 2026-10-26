@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+{{page_title}}
+{% endblock %}
+{% block content %}
+    <p style="color: red;">
+        <b>{{page_title}}</b>
+    </p>
+<p>
+    The page {{ request.path }} could not be found.
+</p>
+
+<p>{{error}}</p>
+
+
+{% endblock %}
