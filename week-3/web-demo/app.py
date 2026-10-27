@@ -35,20 +35,24 @@ def new_product():
 
     if request.method == "POST":
         name = request.form["name"]
-        active = int(request.form["is_active"])
+        active = request.form.get("is_active") == "1"
         stock = int(request.form["stock"])
         price = int(request.form["price"])
 
-        if not active:
-            active = 0
-
+        
         id = add_product(name, active, stock, price)
-        product = id
-        return render_template(
-                "product_details.html",
-                product=product
-            )
-    return render_template("new_product.html")
+        return redirect(url_for(
+            "product_details",
+            id = id,)
+        )
+    return render_template("new_product.html", name=name, stock=stock, price=price)
+
+@app.get("/product_details/<int:id>")
+def product_details(id):
+    product = get_product(id)
+    if product is None:
+        return "Product not found", 404
+    return render_template("product_details.html", product=product)
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
@@ -69,17 +73,17 @@ def order():
         payment_amount=None
         order_id = add_order(product_id, quantity, subtotal, country, payment_amount)
         return render_template(
-                "payment.html",
-                product=product,
-                product_id=product_id,
-                order_id=order_id,
-                quantity=quantity,
-                country=country,
-                subtotal=subtotal,
-                valid_quantity=valid_quantity,
-                enough_stock=enough_stock
-            )
-      
+            "payment.html",
+            product=product,
+            product_id=product_id,
+            order_id=order_id,
+            quantity=quantity,
+            country=country,
+            subtotal=subtotal,
+            valid_quantity=valid_quantity,
+            enough_stock=enough_stock
+        )
+
     products=get_products()
     return render_template("order.html", products=products)
 

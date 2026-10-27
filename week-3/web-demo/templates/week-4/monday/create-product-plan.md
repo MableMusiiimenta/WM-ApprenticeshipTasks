@@ -108,11 +108,7 @@ instead of:
 product=get_product(product_id)
 Also check:
 
-readable blank lines
-consistent indentation
-readable function calls
-no leftover temporary print/debug code unless still needed
-The goal is not only working code, but code another developer can read comfortably.
+
 
 GET /products/new
 
@@ -121,7 +117,6 @@ Expected: Form display
 Actual: Form display
 
 submit a new product
-
 
 Test:
 Expected: 

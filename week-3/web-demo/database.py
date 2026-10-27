@@ -69,7 +69,7 @@ def get_products():
     connection = get_connection()
 
     products = connection.execute(
-        "SELECT * FROM products"
+        "SELECT * FROM products LIMIT 1000" 
     ).fetchall()
 
     connection.close()
