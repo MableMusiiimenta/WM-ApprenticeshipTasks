@@ -34,18 +34,27 @@ def all_products():
 def new_product():
 
     if request.method == "POST":
-        name = request.form["name"]
+        name = request.form["name"].strip()
         active = request.form.get("is_active") == "1"
         stock = int(request.form["stock"])
-        price = int(request.form["price"])
-
+        price = float(request.form["price"])
+        if not name:
+            return "enter valid product name", 400
+        if stock < 0:
+            return "enter valid stock", 400
+        try:
+            price = float(price)
+            if price <= 0:
+                return "enter valid price", 400
+        except ValueError:
+            return render_template("new_product.html", error = "enter a number")
         
         id = add_product(name, active, stock, price)
         return redirect(url_for(
             "product_details",
             id = id,)
         )
-    return render_template("new_product.html", name=name, stock=stock, price=price)
+    return render_template("new_product.html")
 
 @app.get("/product_details/<int:id>")
 def product_details(id):

@@ -29,16 +29,8 @@
     <button type="submit">Submit</button>
 </form>
 
-{% if name is not defined %}
-<p style="color: red;">Product name is required</p>
-{% endif %}
-
-{% if stock < 0 %}
-<p style="color: red;">Enter valid stock</p>
-{% endif %}
-
-{% if price <= 0 %}
-<p style="color: red;">Enter valid price</p>
+{% if error %}
+{{ error }}
 {% endif %}
 
 {% endblock %}
