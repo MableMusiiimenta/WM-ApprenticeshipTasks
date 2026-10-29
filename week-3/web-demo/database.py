@@ -176,6 +176,18 @@ def add_product(name, active, stock, price):
 
     return id
 
+def update_product(product_id, name, active, stock, price):
+    connection = get_connection()
+    connection.execute(
+        """
+        UPDATE products SET name = ?, active = ?, stock = ?, price = ? WHERE id = ?
+        """,
+        (name, active, stock, price, product_id)
+    )
+    connection.commit()
+    connection.close()
+
+
 
 
 # UPDATE table_name

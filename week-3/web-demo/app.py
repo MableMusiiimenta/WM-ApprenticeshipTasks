@@ -1,7 +1,12 @@
 
-from flask import Flask, request, render_template, redirect, url_for, abort
+from flask import Flask, request, render_template, redirect, url_for, abort, flash
 
 app = Flask(__name__)
+
+app.config.update(
+    TESTING=True,
+    SECRET_KEY='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+)
 
 from business import (
     calculate_subtotal,
@@ -12,7 +17,7 @@ from business import (
     
 )
 
-from database import add_product, get_products, get_product, add_order, get_order, get_orders, add_payment, update_stock, get_orders_for_product
+from database import add_product, get_products, get_product, add_order, get_order, get_orders, add_payment, update_product, update_stock,get_orders_for_product
 from data import order_intake
 
 
@@ -37,19 +42,22 @@ def new_product():
         name = request.form["name"].strip()
         active = request.form.get("is_active") == "1"
         stock = int(request.form["stock"])
-        price = float(request.form["price"])
+
         if not name:
-            return "enter valid product name", 400
+            return render_template("new_product.html", error = "enter valid product name"), 400
+        
         if stock < 0:
-            return "enter valid stock", 400
+            return render_template("new_product.html", error = "enter valid stock"), 400
+        
         try:
-            price = float(price)
+            price = float(request.form["price"])
             if price <= 0:
-                return "enter valid price", 400
+                return render_template("new_product.html", error = "enter valid price"), 400
         except ValueError:
-            return render_template("new_product.html", error = "enter a number")
+            return render_template("new_product.html", error = "price should be a number"), 400
         
         id = add_product(name, active, stock, price)
+        flash("Product added successfully", "success")
         return redirect(url_for(
             "product_details",
             id = id,)
@@ -134,10 +142,35 @@ def orders_for_product(product_id):
     if product is None:
             abort(404)
     orders=get_orders_for_product(product["id"])
-
-    
-    
     return render_template("orders_for_product.html", orders=orders, product=product)
+
+@app.route("/products/<int:id>/edit", methods = ("GET", "POST"))
+def edit_product(id):
+    product = get_product(id)
+    if product is None:
+                abort(404)
+    if request.method == "POST":
+        name = request.form["name"].strip()
+        active = request.form.get("is_active") == "1"
+        stock = int(request.form["stock"])
+        
+        if not name:
+            return render_template("new_product.html", error = "enter valid product name"), 400
+                
+        if stock < 0:
+            return render_template("new_product.html", error = "enter valid stock"), 400
+                
+        try:
+            price = float(request.form["price"])
+            if price <= 0:
+                return render_template("new_product.html", error = "enter valid price"), 400
+        except ValueError:
+            return render_template("new_product.html", error = "price should be a number"), 400
+        update_product(id, name, active, stock, price)
+        flash("Product updated successfully", "success")
+        return redirect(url_for("product_details", id=id))
+    return render_template("edit_product.html", product=product)
+
 
 @app.errorhandler(404)
 def not_found(error):
