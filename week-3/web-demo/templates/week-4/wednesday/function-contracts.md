@@ -82,3 +82,63 @@ Also refresh the detail page and observe whether the flash message appears again
 
 On refresh, the flash message does not appear again, because it's a direct GET request for just the details page
 
+
+
+6. Git and end-of-day update
+
+Commit the Flask changes with a meaningful commit message.
+
+Send:
+
+
+Done:
+Created function-contracts.md documentation
+Added product feedback messages
+Tested all three states
+
+Learned:
+To use flash messages
+To start and stop docker compose
+
+Blocked:
+I do not understand how to find the same page in CMS or how to reach a page through localhost
+
+Questions:
+
+Documentation used:
+Not today
+
+AI used: None
+
+Commit hash:
+
+What is the difference between a parameter and an argument?
+a parameter is found in the definition brackets of a function while an argument is the value of the parameter found in the calling of the function
+
+Why must five SQL placeholders receive five values?
+Because each placeholder is meant to be filled by each supplied SQL value
+
+Why does the order of SQL values matter?
+Because the function fills in values in sync with the order of the SQL values
+
+What is the responsibility of update_product()?
+it updates the fields of an already existing product
+
+How did you distinguish created, updated and normal product-detail views?
+The created view displays product details with the flash message, "product added successfully", updated view displays product details with the flash message, "product updated successfully" and normal product-detail view displays product details with no flash message
+
+What did you learn about Flask flash messages?
+I learnt that they simply need to be in the base file, and the flash is an import of flask
+
+If you worked with the CMS:
+
+What frontend page did you inspect?
+https://megastandardug.com/
+
+What did you learn about how CMS content maps to the frontend?
+
+
+Was there anything where you could not immediately identify where the frontend content came from?
+
+One thing I still find difficult:
+understanding compose yml, and other wordpress background stuff
